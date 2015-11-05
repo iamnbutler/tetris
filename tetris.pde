@@ -30,6 +30,6 @@ int block[] = {0,0,0,0}, // Block data: {xPos, yPos, blockType, rotation}
 
 // TODO: Reset
 
-void run() { // Run the game
-
+void run() { 
+  // Run the game
 }
