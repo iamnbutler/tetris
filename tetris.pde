@@ -12,6 +12,8 @@ int block[] = {0,0,0,0}, // Block data: {xPos, yPos, blockType, rotation}
 
 // TODO: Build Controls
 
+    // Start on controls
+
     // TODO: Left, right, down
     
     // TODO: Rotate 0,90,180,270
