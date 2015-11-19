@@ -11,9 +11,9 @@ int block[]           = {0,0,0,0}, // Block data: {xPos, yPos, blockType, rotati
 
 // Block Colors
 final int tetColor0 = color(0,0,0), 
-					tetColor1 = color(0,0,0),
-					tetColor2 = color(0,0,0),
-					tetColor3 = color(0,0,0),
-					tetColor4 = color(0,0,0),
-					tetColor5 = color(0,0,0),
-					tetColor6 = color(0,0,0);
+			tetColor1 = color(0,0,0),
+			tetColor2 = color(0,0,0),
+			tetColor3 = color(0,0,0),
+			tetColor4 = color(0,0,0),
+			tetColor5 = color(0,0,0),
+			tetColor6 = color(0,0,0);
