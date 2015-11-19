@@ -21,8 +21,9 @@ final int tetColor0 = color(0,0,0),
           tetColor5 = color(0,0,0),
           tetColor6 = color(0,0,0);
 
-
 // TODO: Build Controls
+
+    // Start on controls
 
     // TODO: Left, right, down
     
