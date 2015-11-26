@@ -43,12 +43,20 @@ void FillPixel(int row, int col, int color){
   if (col < 0 || col >= cols || row < 0 || row >= rows) {
    return; // Don't do anything if the pixel is off of the grid
   }
+  // Print a pixel to the display
   matrix.drawPixel(row, col, color);
 }
 
 void MoveDown(){ // Shift current block down by 1 pixel per "turn"
+  // WARNING: This is wrong. Don't calculate based on 32 steps, but on faux collision
   if(timeStep <= 31){
-    matrix.fillScreen(0);
+    // First clear the trail from the last frame (prevent the block "smearing")
+    for (int i = 0; i < 4; ++i){
+      for (int j = 0; j < 3; ++j){
+        FillPixel(yPos + (i - 1) + timeStep, xPos + (j - 1), matrix.Color333(0,0,0));
+      }
+    }
+    // Next print the next frame of the block
     for (int i = 0; i < 4; ++i){
       for (int j = 0; j < 3; ++j){
         if (blockLayout[i][j] == 1) {
