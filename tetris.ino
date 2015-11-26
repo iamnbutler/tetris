@@ -10,6 +10,13 @@
 #define C   A2
 RGBmatrixPanel matrix(A, B, C, CLK, LAT, OE, false);
 
+// Variables
+int turn = 0;               // Turn and "Level" are interchangeable
+unsigned long previousMillis = 0;  // The current time of the game
+const long interval = 400; // Speed the block drops
+int timeStep = 0;
+boolean gameOver = false;   // If the game has ended or not
+
 // Build counter to define refresh rate (15fps?)
 
 // TODO: Start Game
@@ -17,22 +24,27 @@ RGBmatrixPanel matrix(A, B, C, CLK, LAT, OE, false);
 void setup() {
   Serial.begin(9600);
   matrix.begin();
+  randomSeed(analogRead(0));
+  Display(0,0,1,1,32,16); // X, Y, blockWidth, blockHeight, Rows, Cols
 }
 
 void loop() {
-  
-  // // T
-  // for (int i = 0; i < 31; i++) {
-  //   // Clear background
-  //   matrix.fillScreen(0);
-    
-  //   matrix.drawPixel(1 + i,0, matrix.Color333(200, 110, 70));
-  //   matrix.drawPixel(1 + i,1, matrix.Color333(200, 110, 70));
-  //   matrix.drawPixel(1 + i,2, matrix.Color333(200, 110, 70));
-  //   matrix.drawPixel(0 + i,1, matrix.Color333(200, 110, 70));
-  //   delay(100);
-  // }
-  Grid();
+  unsigned long currentMillis = millis();
+
+  if(currentMillis - previousMillis >= interval) {
+    previousMillis = currentMillis;  
+    timeStep++;
+  } 
+
+  Serial.println(timeStep);
+
+  NewBlock();
+  MoveDown();
+
+  if(timeStep == 31){
+    // WARNING: This is wrong. Don't calculate based on 32 steps, but on faux collision
+    EndTurn();
+  }
 }
 
 void run() { // Run the game
