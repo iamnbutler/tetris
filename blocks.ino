@@ -1,18 +1,14 @@
 // TODO: Make Blocks
 //   int currentBlock = block[0,0,2,2,blockType,0];
 
-int blockLayout[4][3] = {
-    {0,0,0},
-    {0,0,0},
-    {0,0,0},
-    {0,0,0}
-  },
-  xPos            = 0,
-  yPos            = 0,
-  blockWidth      = 0,
-  blockHeight     = 0,
-  blockColor      = 0,
-  rotation        = 0; // Rotation in degrees, can be 0, 90, 180, 270
+int blockLayout[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}},
+    prevBlockLayout[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}},
+    xPos            = 0,
+    yPos            = 0,
+    blockWidth      = 0,
+    blockHeight     = 0,
+    blockColor      = 0,
+    rotation        = 0; // Rotation in degrees, can be 0, 90, 180, 270
 
 int lastLine = 0;       // This starts faux collision detection
 
@@ -26,10 +22,15 @@ int lastLine = 0;       // This starts faux collision detection
   const int lbColor = matrix.Color333(30,90,120);
   const int jbColor = matrix.Color333(170,120,90);
 
-void NewBlock(){
+void CreateBlock(){
+
+  turnStart = false;
+
+  // Store the previous block layout before defining new block
+  prevBlockLayout[4][3] = blockLayout[4][3];
 
   // TODO: protection against the same block coming up more than twice in a row
-  int blockType = 6;
+  int blockType = random(1,6);
 
   // Block blockTypes: X = 0, T = 1, L = 2, J = 3, I = 4, S = 5, Z = 6
   switch (blockType) { // Define block layouts
@@ -91,14 +92,4 @@ void NewBlock(){
     turn++;
   }
 }
-
-// void Block(const int n, int blockCoord[4]){
-//   blockCoord = new boolean[n][n];
-//   for (int x = 0; x < n; ++x){
-//     for (int y = 0; y < n; ++y){
-//       blockCoord[x][y] = false;
-//     }
-//   }
-// }
-
 
