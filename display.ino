@@ -55,7 +55,6 @@ void FillPixel(int row, int col, int color){
   if (col < 0 || col >= cols || row < 0 || row >= rows) {
    return; // Don't do anything if the pixel is off of the grid
   }
-  // Print a pixel to the display
   matrix.drawPixel(row, col, color);
 }
 
