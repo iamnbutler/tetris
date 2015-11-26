@@ -36,11 +36,7 @@ void NewBlock(){
 
   // TODO: protection against the same block coming up more than twice in a row
   int blockType = random(1,6);
-=======
-  // TODO: protection against the same block coming up more than twice in a row
-  int blockType = 6;
->>>>>>> parent of 8568511... set up prevBlockLayout for alternate smearing cleanup
-
+  
   // Block blockTypes: X = 0, T = 1, L = 2, J = 3, I = 4, S = 5, Z = 6
   switch (blockType) { // Define block layouts
     case 0: // x shape
