@@ -1,12 +1,8 @@
 // TODO: Make Blocks
 //   int currentBlock = block[0,0,2,2,blockType,0];
 
-int blockLayout[4][3] = {
-    {0,0,0},
-    {0,0,0},
-    {0,0,0},
-    {0,0,0}
-  },
+int blockLayout[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}},
+    prevBlockLayout[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}},
   xPos            = 0,
   yPos            = 0,
   blockWidth      = 0,
@@ -28,7 +24,6 @@ int lastLine = 0;       // This starts faux collision detection
 
 void NewBlock(){
 
-<<<<<<< HEAD
   turnStart = false;
 
   // Store the previous block layout before defining new block
@@ -36,7 +31,7 @@ void NewBlock(){
 
   // TODO: protection against the same block coming up more than twice in a row
   int blockType = random(1,6);
-  
+
   // Block blockTypes: X = 0, T = 1, L = 2, J = 3, I = 4, S = 5, Z = 6
   switch (blockType) { // Define block layouts
     case 0: // x shape
@@ -97,14 +92,5 @@ void NewBlock(){
     turn++;
   }
 }
-
-// void Block(const int n, int blockCoord[4]){
-//   blockCoord = new boolean[n][n];
-//   for (int x = 0; x < n; ++x){
-//     for (int y = 0; y < n; ++y){
-//       blockCoord[x][y] = false;
-//     }
-//   }
-// }
 
 
