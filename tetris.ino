@@ -15,6 +15,7 @@ int turn = 0;               // Turn and "Level" are interchangeable
 unsigned long previousMillis = 0;  // The current time of the game
 const long interval = 400; // Speed the block drops
 int timeStep = 0;
+boolean turnStart = true;
 boolean gameOver = false;   // If the game has ended or not
 
 // Build counter to define refresh rate (15fps?)
@@ -24,7 +25,7 @@ boolean gameOver = false;   // If the game has ended or not
 void setup() {
   Serial.begin(9600);
   matrix.begin();
-  randomSeed(analogRead(0));
+  randomSeed(analogRead(5));
   Display(0,0,1,1,32,16); // X, Y, blockWidth, blockHeight, Rows, Cols
 }
 
@@ -38,7 +39,10 @@ void loop() {
 
   Serial.println(timeStep);
 
-  NewBlock();
+  if (turnStart) {
+    NewBlock();
+  }
+
   MoveDown();
 
   if(timeStep == 31){

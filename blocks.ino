@@ -24,11 +24,13 @@ int lastLine = 0;       // This starts faux collision detection
 
 void NewBlock(){
 
+  turnStart = false;
+
   // Store the previous block layout before defining new block
   prevBlockLayout[4][3] = blockLayout[4][3];
 
   // TODO: protection against the same block coming up more than twice in a row
-  int blockType = 4;
+  int blockType = random(1,6);
 
   // Block blockTypes: X = 0, T = 1, L = 2, J = 3, I = 4, S = 5, Z = 6
   switch (blockType) { // Define block layouts
