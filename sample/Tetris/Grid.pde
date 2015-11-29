@@ -26,7 +26,7 @@ class Grid {
   }
    
   void draw() {
-    stroke(255);
+   stroke(0);
     strokeWeight(2);
     rect(x, y, myWidth, myHeight);
     for (int i = 0; i < cols; ++i)
