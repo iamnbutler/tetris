@@ -42,8 +42,8 @@ class Tetromino {
       // if already at the bottom, down shortcuts to lock current and load next block
       board.endTurn();
     } else {
-      stepDown();
-      score += 1;  // get a point for manual down
+      hardDown();
+      
     }
   }
    
@@ -56,13 +56,14 @@ class Tetromino {
       currTime = 0;
     }
   }
-   
-  // move block all the way to the bottom
+  
   void hardDown() {
-    score += (board.rows - y);
+    
     y = final_row;
     board.endTurn();
   }
+   
+  
    
   void rotate() {
     boolean[][] ret = new boolean[shape.matrix.length][shape.matrix.length];

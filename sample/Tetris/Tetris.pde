@@ -24,17 +24,17 @@ Shape next;
 Shape[] shapes = new Shape[7];
 int timer = 20;
 int currTime = 0;
-int score = 0;
+
 int lines = 0;
-int level = 1;
+
 final int SPEED_DECREASE = 2;
-boolean game_over = false;
+boolean game_over = true;
  
 void setup() {
   size(500, 690, P2D);
-  textSize(25);
+  
   controlP5 = new ControlP5(this);
-  controlP5.addButton("play", 1, width/2 - 35, height/2, 70, 20).setLabel("play again");
+  
   shapes[0] = new Shape(4, new int[] {8,9,10,11}, CYAN);  // I
   shapes[1] = new Shape(3, new int[] {0,3,4,5}, BLUE);  // J
   shapes[2] = new Shape(3, new int[] {2,3,4,5}, ORANGE);  // L
@@ -43,7 +43,7 @@ void setup() {
   shapes[5] = new Shape(3, new int[] {1,3,4,5,}, PURPLE);  // T
   shapes[6] = new Shape(4, new int[] {4,5,9,10}, RED);  // Z
   board = new Grid(20, 20, 321, 642, 20, 10);
-  preview = new Grid(355, 20, 116, 58, 2, 4);
+  
   next = shapes[(int)random(7)];
   loadNext();
 }
@@ -51,22 +51,18 @@ void setup() {
 void draw() {
   background(0);
   if (game_over) {
-    text("GAME OVER\nSCORE: " + score, width/2 - 70, height/2 - 50);
     controlP5.draw(); // show the play again button
     return;
   }
   currTime++;
   if (currTime >= timer && board.animateCount == -1)
     curr.stepDown();
-  preview.draw();
+  
   board.draw();
   if (curr != null)
     curr.draw();
-  next.preview();
+
   fill(255);
-  text("LEVEL\n" + level, width - 150, 120);
-  text("LINES\n" + lines, width - 150, 200);
-  text("SCORE\n" + score, width - 150, 280);
 }
  
 void loadNext() {
@@ -82,8 +78,8 @@ void keyPressed() {
     case LEFT : curr.left(); break;
     case RIGHT : curr.right(); break;
     case UP : curr.rotate(); break;
-    case DOWN : curr.down(); break;
-    case ' ' : curr.hardDown(); break;
+    case DOWN : curr.hardDown(); break;
+
   }
 }
  
