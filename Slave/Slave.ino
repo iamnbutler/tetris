@@ -1,20 +1,22 @@
 #include <Wire.h>
 
-byte ledPin1 = 13;
-byte ledPin2 = 12;
-byte ledState1 = 0;
-byte ledState2 = 0;
-byte lastReading1 = 1;
-byte lastReading2 = 1;
+int ledPin1 = 13;
+int ledPin2 = 12;
+int ledPin3 = 11;
+int ledPin4 = 10;
+
+int ledState1 = 0;
+int ledState2 = 0;
+int ledState3 = 0;
+int ledState4 = 0;
 
 void setup() {
-  Wire.begin(7);               // join i2c bus with address #8
+  Wire.begin(8);               // join i2c bus with address #8
   pinMode(ledPin1, OUTPUT);
-  Wire.onReceive(receiveEvent1);
-  
-  Wire.begin(8);
   pinMode(ledPin2, OUTPUT);
-  Wire.onReceive(receiveEvent2);
+  pinMode(ledPin3, OUTPUT);
+  pinMode(ledPin4, OUTPUT);
+  Wire.onReceive(receiveEvent);
   Serial.begin(9600);           // start serial for output
 }
 
@@ -24,12 +26,16 @@ void loop() {
 
 // function that executes whenever data is received from master
 // this function is registered as an event, see setup()
-void receiveEvent1(int howMany1) {
-  while (1 < Wire.available()) { // loop through all but the last
-    char c = Wire.read(); // receive byte as a character
-    Serial.print(c);         // print the character
-  }
+void receiveEvent(int buttons) {
+ 
   int buttonRotate= Wire.read();    // receive byte as an integer
+  int buttonRight = Wire.read();
+  int buttonDown= Wire.read();
+  int buttonLeft = Wire.read();
+  int lastReading1= Wire.read();    // receive byte as an integer
+  int lastReading2 = Wire.read();
+  int lastReading3= Wire.read(); 
+  int lastReading4 = Wire.read();
   
   if (buttonRotate == 0 && lastReading1 == 1) {
     if (ledState1 == 1) {
@@ -37,33 +43,44 @@ void receiveEvent1(int howMany1) {
     } else {
       ledState1 = 1;
     }
-    delay(30);
+    delay(10);
   }
-  lastReading1 = buttonRotate;
-  
-  digitalWrite(ledPin1, ledState1);
 
-  Serial.println(buttonRotate); 
-} 
-
-  void receiveEvent2(int howMany2) {
-  while (1 < Wire.available()) { // loop through all but the last
-    char b = Wire.read(); // receive byte as a character
-    Serial.print(b);         // print the character
-  }
-  int buttonRight= Wire.read();    // receive byte as an integer
-  
   if (buttonRight == 0 && lastReading2 == 1) {
     if (ledState2 == 1) {
       ledState2 = 0;
     } else {
       ledState2 = 1;
     }
-    delay(30);
+    delay(10);
   }
-  lastReading2 = buttonRight;
-  
-  digitalWrite(ledPin2, ledState2);
 
-  Serial.println(buttonRight);         // print the integer
+  if (buttonDown == 0 && lastReading3 == 1) {
+    if (ledState3 == 1) {
+      ledState3 = 0;
+  } else {
+      ledState3 = 1;
+  }
+  delay(10);
 }
+
+if (buttonLeft == 0 && lastReading4 == 1) {
+    if (ledState4 == 1) {
+      ledState4 = 0;
+  } else {
+     ledState4 = 1;
+  }
+  delay(10);
+}
+  
+  digitalWrite(ledPin1, ledState1);
+  digitalWrite(ledPin2, ledState2);
+  digitalWrite(ledPin3, ledState3);
+  digitalWrite(ledPin4, ledState4);
+
+  Serial.println(buttonRotate); 
+  Serial.println(buttonRight); 
+  Serial.println(buttonDown); 
+  Serial.println(buttonLeft); 
+
+} 

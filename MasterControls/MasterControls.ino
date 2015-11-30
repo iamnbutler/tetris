@@ -1,31 +1,43 @@
 #include <Wire.h>
+ 
+int inputPin2 = 2;
+int inputPin3 = 3;
+int inputPin4 = 4;
+int inputPin5 = 5;
 
-byte inputPin2 = 2;
-byte inputPin3 = 3;
-
-byte lastReading1 = 1;
-byte lastReading2 = 1;
-
+int lastReading1 = 1;
+int lastReading2 = 1;
+int lastReading3 = 1;
+int lastReading4 = 1;
 
 void setup() {
   Wire.begin(); // join i2c bus (address optional for master)
   pinMode(inputPin2, INPUT);
   pinMode(inputPin3, INPUT);
+  pinMode(inputPin4, INPUT);
+  pinMode(inputPin5, INPUT);
 }
 
 void loop() {
-  Wire.beginTransmission(7); // transmit to device #8
-  byte buttonRotate = digitalRead(inputPin2);
-  Wire.write(buttonRotate);   // sends one byte
-  lastReading1 = buttonRotate;
-  Wire.endTransmission(7);    // stop transmitting
-  delay(500);
-  
-  Wire.beginTransmission(8); //
-  byte buttonRight = digitalRead(inputPin3);
+  Wire.beginTransmission(8); // transmit to device #8
+  int buttonRotate = digitalRead(inputPin2);
+  int buttonRight = digitalRead(inputPin3);
+  int buttonDown = digitalRead(inputPin4);
+  int buttonLeft = digitalRead(inputPin5);
+  Wire.write(buttonRotate);
   Wire.write(buttonRight);   // sends one byte
-  lastReading2 = buttonRight;
+  Wire.write(buttonDown);
+  Wire.write(buttonLeft); 
+  Wire.write(lastReading1);
+  Wire.write(lastReading2);
+  Wire.write(lastReading3);
+  Wire.write(lastReading4);
   Wire.endTransmission(8);    // stop transmitting
 
-  delay(500);
+  lastReading1 = buttonRotate;
+  lastReading2 = buttonRight;
+  lastReading3 = buttonDown;
+  lastReading4 = buttonLeft;
+
+  delay(200);
 }
