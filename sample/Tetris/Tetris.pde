@@ -31,7 +31,7 @@ final int SPEED_DECREASE = 2;
 boolean game_over = true;
  
 void setup() {
-  size(500, 690, P2D);
+  size(321, 690, P2D);
   
   controlP5 = new ControlP5(this);
   
@@ -42,7 +42,7 @@ void setup() {
   shapes[4] = new Shape(4, new int[] {5,6,8,9}, GREEN);  // S
   shapes[5] = new Shape(3, new int[] {1,3,4,5,}, PURPLE);  // T
   shapes[6] = new Shape(4, new int[] {4,5,9,10}, RED);  // Z
-  board = new Grid(20, 20, 321, 642, 20, 10);
+  board = new Grid(0, 20, 321, 675, 32, 16);
   
   next = shapes[(int)random(7)];
   loadNext();
