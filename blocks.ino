@@ -3,12 +3,12 @@
 
 int blockLayout[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}},
     prevBlockLayout[4][3] = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}},
-    xPos            = 0,
-    yPos            = 0,
-    blockWidth      = 0,
-    blockHeight     = 0,
-    blockColor      = 0,
-    rotation        = 0; // Rotation in degrees, can be 0, 90, 180, 270
+  xPos            = 0,
+  yPos            = 0,
+  blockWidth      = 0,
+  blockHeight     = 0,
+  blockColor      = 0,
+  rotation        = 0; // Rotation in degrees, can be 0, 90, 180, 270
 
 int lastLine = 0;       // This starts faux collision detection
 
@@ -23,6 +23,11 @@ int lastLine = 0;       // This starts faux collision detection
   const int jbColor = matrix.Color333(170,120,90);
 
 void CreateBlock(){
+
+  turnStart = false;
+
+  // Store the previous block layout before defining new block
+  prevBlockLayout[4][3] = blockLayout[4][3];
 
   turnStart = false;
 
@@ -92,4 +97,3 @@ void CreateBlock(){
     turn++;
   }
 }
-

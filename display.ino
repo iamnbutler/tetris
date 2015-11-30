@@ -15,6 +15,7 @@
 // ============= //
 
 int displayFloor = 31;
+bool pixelMap[31][15];
 
 // Define constants
 
@@ -35,6 +36,16 @@ void Display(int x, int y, int w, int h, int rows, int cols){
       // pixelMap[i][j] = false; // At the start there are no filled pixels
     }
   }
+}
+
+void UpdateDisplay() {
+  // for (int i = 0; i < 4; ++i){
+  //   for (int j = 0; j < 3; ++j){
+  //     if (blockLayout[i][j] == 1) {
+  //       FillPixel(yPos + i + timeStep, xPos + j, blockColor);
+  //     }
+  //   }
+  // }
 }
 
 void FillPixel(int row, int col, int color){
@@ -62,28 +73,21 @@ void MoveDown(){ // Shift current block down by 1 pixel per "turn"
       }
     }
   }
+  if(timeStep < 31){
+    // First clear the trail from the last frame (prevent the block "smearing")
+    for (int i = 0; i < 4; ++i){
+      for (int j = 0; j < 3; ++j){
+        FillPixel(yPos + (i - 1) + timeStep, xPos + j, matrix.Color333(0,0,0));
+      }
+    }
+  }
 }
 
 void EndTurn() { // Set things up for the nxt block and check for complete rows
 
   timeStep = 0; // Reset the step
-  Serial.println("Array Row 0:");
-  Serial.print(tetrisBoard[15][0]);
-  Serial.print(", ");
-  Serial.print(tetrisBoard[15][1]);
-  Serial.print(", ");
-  Serial.print(tetrisBoard[15][2]);
-  Serial.print(", ");
-  Serial.print(tetrisBoard[15][3]);
-  Serial.print(", ");
-  Serial.print(tetrisBoard[15][4]);
-  Serial.print(", ");
-  Serial.print(tetrisBoard[15][5]);
-  Serial.print(", ");
-  Serial.print(tetrisBoard[15][6]);
-  Serial.print(", ");
-  Serial.print(tetrisBoard[15][7]);
-  Serial.println();
+  turnStart = true;
+  // UpdateDisplay();
 }
 
 void ClearDisplay(){
