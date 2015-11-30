@@ -17,6 +17,8 @@ const long interval = 400; // Speed the block drops
 int timeStep = 0;
 boolean turnStart = true;
 boolean gameOver = false;   // If the game has ended or not
+int tetrisBoard[16][8] = {{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0},{0,0,0,0,0,0,0,0}};
+
 
 // Build counter to define refresh rate (15fps?)
 
@@ -37,15 +39,13 @@ void loop() {
     timeStep++;
   } 
 
-  Serial.println(timeStep);
-
   if (turnStart) {
-    NewBlock();
-  }
-
+    CreateBlock();
+  }\
+  
   MoveDown();
 
-  if(timeStep == 31){
+  if(timeStep == 15){
     // WARNING: This is wrong. Don't calculate based on 32 steps, but on faux collision
     EndTurn();
   }

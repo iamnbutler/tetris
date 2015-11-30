@@ -10,25 +10,25 @@ class Grid {
     this.x = x;
     this.y = y;
     myWidth = w;
-    myHeight = h; 
-    this.rows = rows; // Row
-    this.cols = cols; // Column
+    myHeight = h;
+    this.rows = rows;
+    this.cols = cols;
     colors = new int[cols][rows];
     for (int i = 0; i < cols; ++i)
       for (int j = 0; j < rows; ++j)
         colors[i][j] = 0;
   }
    
-  // void clear() {
-  //   for (int i = 0; i < cols; ++i)
-  //     for (int j = 0; j < rows; ++j)
-  //       colors[i][j] = 0;
-  // }
+  void clear() {
+    for (int i = 0; i < cols; ++i)
+      for (int j = 0; j < rows; ++j)
+        colors[i][j] = 0;
+  }
    
   void draw() {
-    stroke(255);
+   stroke(0);
     strokeWeight(2);
-    rect(x, y, myWidth, myHeight); // draw outside border
+    rect(x, y, myWidth, myHeight);
     for (int i = 0; i < cols; ++i)
       for (int j = 0; j < rows; ++j)
         fillSquare(i, j, colors[i][j]);
@@ -94,11 +94,11 @@ class Grid {
       return false;
        
     if (lines/10 < (lines + clearedRows.size())/10) {
-      level++;
+      
       timer -= SPEED_DECREASE;
     }
     lines += clearedRows.size();
-    score += (1 << clearedRows.size() - 1)*100;
+    
     return true;
   }
    

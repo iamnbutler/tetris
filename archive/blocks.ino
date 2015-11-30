@@ -22,7 +22,12 @@ int lastLine = 0;       // This starts faux collision detection
   const int lbColor = matrix.Color333(30,90,120);
   const int jbColor = matrix.Color333(170,120,90);
 
-void NewBlock(){
+void CreateBlock(){
+
+  turnStart = false;
+
+  // Store the previous block layout before defining new block
+  prevBlockLayout[4][3] = blockLayout[4][3];
 
   turnStart = false;
 
@@ -92,5 +97,3 @@ void NewBlock(){
     turn++;
   }
 }
-
-
