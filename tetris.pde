@@ -28,7 +28,7 @@ final int SPEED_DECREASE = 2;
 boolean game_over = true;
  
 void setup() {
-  size(16, 32, P2D);
+  size(160, 320, P2D);
   
   controlP5 = new ControlP5(this);
   
