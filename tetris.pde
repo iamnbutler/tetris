@@ -43,9 +43,18 @@ void setup() {
   
   next = shapes[(int)random(7)];
   loadNext();
+
 }
  
 void draw() {
+  // The serial port:
+  // Serial myPort;
+  // printArray(Serial.list());
+  // myPort = new Serial(this, Serial.list()[0], 9600);
+  // myPort.write(65);
+  // println(Arduino.list());
+  // arduino = new Arduino(this, Arduino.list()[1], 57600);
+
   background(0);
   if (game_over) {
     controlP5.draw(); // show the play again button

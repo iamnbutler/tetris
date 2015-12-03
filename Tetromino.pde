@@ -103,7 +103,6 @@ class Tetromino {
       for (int j = 0; j < shape.matrix.length; ++j) {
         if (shape.matrix[i][j]) {
           board.fillSquare(x + i, y + j, shape.c);
-          board.outlineSquare(x + i, final_row + j);
         }
       }
     }

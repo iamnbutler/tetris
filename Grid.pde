@@ -57,15 +57,7 @@ class Grid {
     noStroke();
     fill(c);
     rect(x + col*(myWidth/cols), y + row*(myHeight/rows), myWidth/cols, myHeight/rows);
-  }
-   
-  void outlineSquare(int col, int row) {
-    if (col < 0 || col >= cols || row < 0 || row >= rows)
-      return;
-    noFill();
-    stroke(255);
-    strokeWeight(2);
-    rect(x + col*(myWidth/cols), y + row*(myHeight/rows), myWidth/cols, myHeight/rows);
+    // matrix.drawPixel(x + col, y + row, matrix.Color333(c));
   }
    
   void endTurn() {
