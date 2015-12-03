@@ -19,24 +19,8 @@ bool pixelMap[31][15];
 
 // Define constants
 
-const int cols = 8;
-const int rows = 16;
-
   // Empty pixel color
   const int c = matrix.Color333(0, 0, 0);
-
-// Define Variables
-int pixel[cols][rows];
-
-void Display(int x, int y, int w, int h, int rows, int cols){
-  blockWidth = w;
-  blockHeight = h; 
-  for (int i=0; i < rows; i++){
-    for (int j=0; j < cols; j++){
-      // pixelMap[i][j] = false; // At the start there are no filled pixels
-    }
-  }
-}
 
 void UpdateDisplay() {
   // for (int i = 0; i < 4; ++i){
@@ -55,29 +39,39 @@ void FillPixel(int row, int col, int color){
   matrix.drawPixel(row, col, color);
 }
 
-void MoveDown(){ // Shift current block down by 1 pixel per "turn"
-  // WARNING: This is wrong. Don't calculate based on 32 steps, but on faux collision
-  if(timeStep < 15){
-    // First clear the trail from the last frame (prevent the block "smearing")
-    for (int i = 0; i < 4; ++i){
-      for (int j = 0; j < 3; ++j){
-        FillPixel(yPos + (i - 1) + timeStep, xPos + j, matrix.Color333(0,0,0));
-      }
-    }
-    // Next print the next frame of the block
-    for (int i = 0; i < 4; ++i){
-      for (int j = 0; j < 3; ++j){
-        if (blockLayout[i][j] == 1) {
-          FillPixel(yPos + i + timeStep, xPos + j, blockColor);
+void MoveLeft(){ // Shift current block down by 1 pixel per "turn"
+  // // First clear the trail from the last frame (prevent the block "smearing")
+  // for (int i = 0; i < 4; ++i){
+  //   for (int j = 0; j < 3; ++j){
+  //     FillPixel(yPos + (i - 1) + timeStep, xPos + j, matrix.Color333(0,0,0));
+  //   }
+  // }
+  // // Next print the next frame of the block
+  // for (int i = 0; i < 4; ++i){
+  //   for (int j = 0; j < 3; ++j){
+  //     if (blockLayout[i][j] == 1) {
+  //       FillPixel(yPos + i + timeStep, xPos + j, blockColor);
+  //     }
+  //   }
+  // }
+  for (int i=0; i < rows; i++){
+    if (i = 28) {
+      // Moving grass animation
+
+      for (int j=0; j < cols; j++){
+        if (timeStep % 2) {
+          if (j % 2) {
+            matrix.drawPixel(i, j, grassColor1);
+          } else {
+            matrix.drawPixel(i, j, grassColor2);
+          }
+        } else {
+          if (j % 2) {
+            matrix.drawPixel(i, j, grassColor2);
+          } else {
+            matrix.drawPixel(i, j, grassColor1);
+          }
         }
-      }
-    }
-  }
-  if(timeStep < 31){
-    // First clear the trail from the last frame (prevent the block "smearing")
-    for (int i = 0; i < 4; ++i){
-      for (int j = 0; j < 3; ++j){
-        FillPixel(yPos + (i - 1) + timeStep, xPos + j, matrix.Color333(0,0,0));
       }
     }
   }
@@ -86,7 +80,6 @@ void MoveDown(){ // Shift current block down by 1 pixel per "turn"
 void EndTurn() { // Set things up for the nxt block and check for complete rows
 
   timeStep = 0; // Reset the step
-  turnStart = true;
   // UpdateDisplay();
 }
 
@@ -95,3 +88,10 @@ void ClearDisplay(){
   matrix.fillScreen(0);
 }
 
+void createGround() {
+  for (int i=29; i < rows; i++){
+    for (int j=0; j < cols; j++){
+      matrix.drawPixel(i, j, groundColor);
+    }
+  }
+}
